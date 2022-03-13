@@ -1,4 +1,4 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, HttpException, Injectable } from '@nestjs/common';
 import { UserType } from '@prisma/client';
 import { PrismaService } from '../../prisma/prisma.service';
 import * as bcrypt from 'bcryptjs';
@@ -39,6 +39,36 @@ export class AuthService {
       },
     });
     return this.generateJWT(user.firstName, user.id);
+  }
+
+  async signin(body: SigninParams): Promise<string> {
+    const user = await this.prismaService.user.findUnique({
+      where: {
+        email: body.email,
+      },
+    });
+    if (!user) {
+      throw new HttpException('Invalid credentials', 400);
+    }
+
+    const valid = await bcrypt.compare(body.password, user.password);
+
+    if (!valid) {
+      throw new HttpException('Invalid credentials', 400);
+    }
+    return this.generateJWT(user.firstName, user.id);
+  }
+
+  // allow user to become admin (only admins can generate this)
+
+  /**
+   *   @param email (email of user)
+   *   @param userType (admin)
+   *   @returns hash
+   * */
+  generateAccessKey(email: string, userType: UserType) {
+    const secret = `${email}-${userType}-${process.env.PRODUCT_KEY_SECRET}`;
+    return bcrypt.hash(secret, 10);
   }
 
   private generateJWT(name: string, id: number): string {
