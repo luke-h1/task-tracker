@@ -1,0 +1,40 @@
+name: Build 
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [dev, main]
+jobs:
+  test:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Setup node
+        uses: luke-h1/setup-node@v2
+        with:
+          node-version: 14      
+      
+      - name: Checkout
+        uses: luke-h1/checkout@v2
+
+      - name: Use latest npm version
+        run: npm i -g npm@latest
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: format
+        run: yarn format
+
+      - name: lint
+        run: yarn lint
+
+      - name: jest
+        run: yarn test
+
+      - name: tsc
+        run: yarn tsc
+
+      - name: build
+        run: yarn build
