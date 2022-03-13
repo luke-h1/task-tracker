@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_USER: task
       POSTGRES_PASSWORD: task
-      POSTGRES_DB: task
+      POSTGRES_DB: taskdb
     volumes:
       - .dbdata:/var/lib/postgres
     expose:
