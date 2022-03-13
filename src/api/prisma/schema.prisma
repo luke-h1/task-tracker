@@ -32,9 +32,8 @@ model Task {
   title       String
   body        String
   completed   Boolean
-  category_id Int
   user_id     Int
-  created_by  User     @relation(fields: [user_id], references: [id])
+  user  User     @relation(fields: [user_id], references: [id])
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt()
 }

@@ -1,6 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { TaskResponseDto } from './dtos/task.dto';
+import { createTaskParams } from './params/task.param';
+import { updateTaskParams } from '../../dist/task/params/task.param';
 
 @Injectable()
 export class TaskService {
@@ -34,5 +36,41 @@ export class TaskService {
       },
     });
     return new TaskResponseDto(task);
+  }
+
+  async createTask(body: createTaskParams, userId: number) {
+    const task = await this.prismaService.task.create({
+      data: {
+        ...body,
+        user_id: userId,
+      },
+    });
+    return new TaskResponseDto(task);
+  }
+
+  async updateTask(body: updateTaskParams, id: number) {
+    const task = await this.prismaService.task.findUnique({
+      where: { id },
+    });
+    if (!task) {
+      throw new NotFoundException();
+    }
+    const updatedTask = await this.prismaService.task.update({
+      where: { id },
+      data: body,
+    });
+    return new TaskResponseDto(updatedTask);
+  }
+
+  async deleteTask(id: number) {
+    const task = await this.prismaService.task.findUnique({
+      where: { id },
+    });
+    if (!task) {
+      throw new NotFoundException();
+    }
+    await this.prismaService.task.delete({
+      where: { id },
+    });
   }
 }
