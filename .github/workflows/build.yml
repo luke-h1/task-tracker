@@ -29,6 +29,9 @@ jobs:
 
       - name: lint
         run: yarn lint
+        
+      - name: start docker DBs
+        run: cd src/api && docker-compose up -d && cd ../../
 
       - name: jest
         run: yarn workspace task-api test

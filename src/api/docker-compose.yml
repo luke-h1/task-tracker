@@ -7,9 +7,9 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_USER: task
-      POSTGRES_PASSWORD: task
-      POSTGRES_DB: taskdb
+      POSTGRES_USER: tasktracker
+      POSTGRES_PASSWORD: tasktracker
+      POSTGRES_DB: tasktracker
     volumes:
       - .dbdata:/var/lib/postgres
     expose:
