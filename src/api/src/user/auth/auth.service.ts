@@ -68,7 +68,7 @@ export class AuthService {
    *   @param userType (admin)
    *   @returns hash
    * */
-  generateAccessKey(email: string, userType: UserType) {
+  generateAccessKey(email: string, userType: UserType): Promise<string> {
     const s = `${email}-${userType}-${process.env.ACCESS_KEY_SECRET}`;
     return bcrypt.hash(s, 10);
   }
