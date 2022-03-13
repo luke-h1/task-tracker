@@ -1,0 +1,16 @@
+version: '3'
+services:
+  db:
+    container_name: task-db
+    image: 'postgres:latest'
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: task
+      POSTGRES_PASSWORD: task
+      POSTGRES_DB: task
+    volumes:
+      - .dbdata:/var/lib/postgres
+    expose:
+      - 5432
