@@ -12,6 +12,19 @@ export class TaskResponseDto {
   }
 }
 
+export class CreateTaskDto {
+  @IsString()
+  @IsNotEmpty()
+  title: string;
+
+  @IsString()
+  @IsNotEmpty()
+  body: string;
+
+  @IsBoolean()
+  completed: boolean;
+}
+
 export class UpdateTaskDto {
   @IsString()
   @IsNotEmpty()

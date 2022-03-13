@@ -7,10 +7,11 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  Post,
   Put,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UpdateTaskDto } from './dtos/task.dto';
+import { CreateTaskDto, UpdateTaskDto } from './dtos/task.dto';
 import { TaskService } from './task.service';
 
 @Controller('task')
@@ -45,6 +46,12 @@ export class TaskController {
     }
     return this.taskService.getTask(id);
   }
+
+  @Post()
+  async createTask(@Body() body: CreateTaskDto, @User() user: UserInfo) {
+    return this.taskService.createTask(body, user.id);
+  }
+
   @Put(':id')
   async updateTask(
     @Param('id', ParseIntPipe) id: number,
