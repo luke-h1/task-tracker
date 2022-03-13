@@ -12,7 +12,7 @@ import { AuthGuard } from './gaurds/auth.gaurd';
 
 @Module({
   imports: [UserModule, TaskModule, PrismaModule],
-  controllers: [AppController, TaskController],
+  controllers: [AppController],
   providers: [
     AppService,
     TaskService,
