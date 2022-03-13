@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "f32e49e6-f739-478c-b12d-4c31eabf0152",
+		"name": "Task tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signup as DEFAULT user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"luke\",\n    \"lastName\": \"luke\",\n    \"email\": \"test1@test.com\",\n    \"password\": \"testing12345478\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/v1/api/auth/signup/DEFAULT",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"api",
+						"auth",
+						"signup",
+						"DEFAULT"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibHVrZSIsImlkIjoyLCJpYXQiOjE2NDcxNzk4NjksImV4cCI6MTY0NzE4MzQ2OX0.gv-U1kgkorwLOfGA1U1zydti4TFqEyVSSKq4rg7oOGE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"test1@test.com\",\n    \"password\": \"testing12345478\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/v1/api/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
