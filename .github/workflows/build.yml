@@ -39,7 +39,7 @@ jobs:
         run: yarn workspace task-api test
 
       - name: tsc
-        run: yarn tsc
+        run: yarn workspace task-api tsc
 
       - name: build
         run: yarn build

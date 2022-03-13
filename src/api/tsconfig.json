@@ -1,9 +1,10 @@
 {
-  "compileOnSave": true,
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "module": "CommonJS",
     "moduleResolution": "Node",
     "declaration": true,
+    "strictPropertyInitialization": false,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
