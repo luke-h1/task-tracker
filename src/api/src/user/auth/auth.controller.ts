@@ -2,6 +2,7 @@ import * as bcrypt from 'bcryptjs';
 import {
   Body,
   Controller,
+  Get,
   Param,
   ParseEnumPipe,
   Post,
@@ -10,6 +11,8 @@ import {
 import { AuthService } from './auth.service';
 import { SignupDto, SigninDto, GenerateAccessKeyDto } from '../dtos/SignupDto';
 import { UserType } from '@prisma/client';
+import User from '../decorators/user.decorator';
+import { UserInfo } from '../../../dist/user/decorators/user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -44,5 +47,10 @@ export class AuthController {
   @Post('access-key')
   generateAccessKey(@Body() { email, userType }: GenerateAccessKeyDto) {
     return this.authService.generateAccessKey(email, userType);
+  }
+
+  @Get('/me')
+  me(@User() user: UserInfo) {
+    return User;
   }
 }
