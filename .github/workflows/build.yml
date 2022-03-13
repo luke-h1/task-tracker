@@ -31,7 +31,7 @@ jobs:
         run: yarn lint
 
       - name: jest
-        run: yarn test
+        run: yarn workspace task-api test
 
       - name: tsc
         run: yarn tsc
