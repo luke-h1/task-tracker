@@ -4,6 +4,8 @@ on:
     branches: [dev]
   pull_request:
     branches: [dev, main]
+env:
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
 jobs:
   test:
     name: Build
@@ -29,12 +31,15 @@ jobs:
 
       - name: lint
         run: yarn lint
+        
+      - name: start docker DBs
+        run: cd src/api && docker-compose up -d && cd ../../
 
       - name: jest
-        run: yarn test
+        run: yarn workspace task-api test
 
       - name: tsc
-        run: yarn tsc
+        run: yarn workspace task-api tsc
 
       - name: build
-        run: yarn build
+        run: yarn workspace task-api build
