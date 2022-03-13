@@ -11,8 +11,7 @@ import {
 import { AuthService } from './auth.service';
 import { SignupDto, SigninDto, GenerateAccessKeyDto } from '../dtos/SignupDto';
 import { UserType } from '@prisma/client';
-import User from '../decorators/user.decorator';
-import { UserInfo } from '../../../dist/user/decorators/user.decorator';
+import { User, UserInfo } from '../decorators/user.decorator';
 
 @Controller('auth')
 export class AuthController {
