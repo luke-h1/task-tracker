@@ -4,6 +4,8 @@ on:
     branches: [dev]
   pull_request:
     branches: [dev, main]
+env:
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
 jobs:
   test:
     name: Build
