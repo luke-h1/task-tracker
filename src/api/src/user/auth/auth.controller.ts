@@ -30,6 +30,7 @@ export class AuthController {
         validAccessKey,
         body.accessKey,
       );
+      console.log(isValidAccessKey);
       if (!isValidAccessKey) {
         throw new UnauthorizedException();
       }

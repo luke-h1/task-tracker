@@ -28,7 +28,6 @@ export class SignupDto {
 
   @IsOptional()
   @IsString()
-  @IsNotEmpty()
   accessKey?: string;
 }
 

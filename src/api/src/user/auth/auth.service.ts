@@ -33,7 +33,9 @@ export class AuthService {
 
     const user = await this.prismaService.user.create({
       data: {
-        ...body,
+        email: body.email,
+        firstName: body.firstName,
+        lastName: body.lastName,
         user_type: userType,
         password: hashedPassword,
       },
@@ -67,8 +69,8 @@ export class AuthService {
    *   @returns hash
    * */
   generateAccessKey(email: string, userType: UserType) {
-    const secret = `${email}-${userType}-${process.env.PRODUCT_KEY_SECRET}`;
-    return bcrypt.hash(secret, 10);
+    const s = `${email}-${userType}-${process.env.ACCESS_KEY_SECRET}`;
+    return bcrypt.hash(s, 10);
   }
 
   private generateJWT(name: string, id: number): string {
