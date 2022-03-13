@@ -8,7 +8,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { SignupDto } from '../dtos/SignupDto';
+import { SignupDto, SigninDto, GenerateAccessKeyDto } from '../dtos/SignupDto';
 import { UserType } from '@prisma/client';
 
 @Controller('auth')
@@ -33,5 +33,16 @@ export class AuthController {
       }
     }
     return this.authService.signup(body, userType);
+  }
+
+  @Post('/signin')
+  signin(@Body() body: SigninDto) {
+    return this.authService.signin(body);
+  }
+
+  // allow admin to generate access key
+  @Post('access-key')
+  generateAccessKey(@Body() { email, userType }: GenerateAccessKeyDto) {
+    return this.authService.generateAccessKey(email, userType);
   }
 }
