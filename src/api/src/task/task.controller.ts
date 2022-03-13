@@ -12,7 +12,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { CreateTaskDto, UpdateTaskDto } from './dtos/task.dto';
-import { TaskService } from './task.service';
+import { TaskService } from '@api/task/task.service';
 
 @Controller('task')
 export class TaskController {
